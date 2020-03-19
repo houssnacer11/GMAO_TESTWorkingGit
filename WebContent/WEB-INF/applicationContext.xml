@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"> -->
+	<!-- <property name="driverClass" value="com.mysql.jdbc.Driver" /> -->
+	<!-- <property name="jdbcUrl" value="jdbc:mysql://192.168.1.4:3307/xtegpr" 
+		/> -->
+	<!-- <property name="user" value="root" /> -->
+	<!-- <property name="password" value="root" /> -->
+	<!-- <property name="initialPoolSize" value="5" /> -->
+	<!-- <property name="minPoolSize" value="5" /> -->
+	<!-- <property name="maxPoolSize" value="50" /> -->
+	<!-- </bean> -->
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/bxtegmaotest" />
+		<property name="user" value="root" />
+		<property name="password" value="root" />
+		<property name="initialPoolSize" value="5" />
+		<property name="minPoolSize" value="5" />
+		<property name="maxPoolSize" value="50" />
+	</bean>
+
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+	        <list>
+	        
+			<value>xtensus.entity.Carburant</value>
+			<value>xtensus.entity.Assureur</value>
+			
+			</list>
+		</property>
+		<property name="mappingLocations" value="classpath:query.hbm.xml" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- Generic DAO <bean id="genericDAO" class="xtensus.pfe.dao.AbstractGenericDao"> 
+		<property name="sessionFactory" ref="sessionFactory"/> </bean> -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<context:annotation-config />
+
+
+	<context:component-scan base-package="xtensus.*">
+		<context:include-filter type="regex"
+			expression="xtensus.beans.common.*" />
+	</context:component-scan>
+
+	<!-- Cette bean permet de dire au conteneur Spring que les classes @Repository 
+		ont besoin que des transaction exception soient appliquées sur eux -->
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<!-- bean pour les msg generique -->
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>classpath:messages</value>
+			</list>
+		</property>
+	</bean>
+</beans>

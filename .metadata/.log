@@ -1,0 +1,99 @@
+!SESSION 2018-02-19 14:38:06.420 -----------------------------------------------
+eclipse.buildId=M20100909-0800
+java.version=1.6.0_10
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.ui 2 0 2018-02-19 14:38:38.201
+!MESSAGE Warnings while parsing the action sets from the 'org.eclipse.ui.actionSets' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2018-02-19 14:38:38.201
+!MESSAGE There was no class provided, and the action is not retargettable: plug-in='com.sheelapps.plugin.dbexplorer', id='com.sheelapps.plugin.dbexplorer.executecommandaction'
+
+!ENTRY org.eclipse.jface 2 0 2018-02-19 14:38:41.751
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-02-19 14:38:41.751
+!MESSAGE A conflict occurred for CTRL+DEL:
+Binding(CTRL+DEL,
+	ParameterizedCommand(Command(org.eclipse.datatools.sqltools.result.removeInstance,Remove Result,
+		,
+		Category(org.eclipse.datatools.sqltools.result.category,SQL Results View,null,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+DEL,
+	ParameterizedCommand(Command(org.eclipse.graphiti.ui.internal.action.RemoveAction,Remove,
+		Remove selected Pictogram Elements,
+		Category(org.eclipse.graphiti.ui.Graphiti_Category,Edit,Graphiti Diagram Editor,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SESSION 2018-02-19 14:39:06.570 -----------------------------------------------
+eclipse.buildId=M20100909-0800
+java.version=1.6.0_10
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.ui 2 0 2018-02-19 14:39:13.638
+!MESSAGE Warnings while parsing the action sets from the 'org.eclipse.ui.actionSets' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2018-02-19 14:39:13.638
+!MESSAGE There was no class provided, and the action is not retargettable: plug-in='com.sheelapps.plugin.dbexplorer', id='com.sheelapps.plugin.dbexplorer.executecommandaction'
+
+!ENTRY org.eclipse.jface 2 0 2018-02-19 14:39:16.184
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-02-19 14:39:16.184
+!MESSAGE A conflict occurred for CTRL+DEL:
+Binding(CTRL+DEL,
+	ParameterizedCommand(Command(org.eclipse.datatools.sqltools.result.removeInstance,Remove Result,
+		,
+		Category(org.eclipse.datatools.sqltools.result.category,SQL Results View,null,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+DEL,
+	ParameterizedCommand(Command(org.eclipse.graphiti.ui.internal.action.RemoveAction,Remove,
+		Remove selected Pictogram Elements,
+		Category(org.eclipse.graphiti.ui.Graphiti_Category,Edit,Graphiti Diagram Editor,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SESSION 2018-02-19 14:39:22.523 -----------------------------------------------
+eclipse.buildId=M20100909-0800
+java.version=1.6.0_10
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.ui 2 0 2018-02-19 14:39:45.977
+!MESSAGE Warnings while parsing the action sets from the 'org.eclipse.ui.actionSets' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2018-02-19 14:39:45.977
+!MESSAGE There was no class provided, and the action is not retargettable: plug-in='com.sheelapps.plugin.dbexplorer', id='com.sheelapps.plugin.dbexplorer.executecommandaction'
+
+!ENTRY org.eclipse.jface 2 0 2018-02-19 14:39:48.598
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-02-19 14:39:48.598
+!MESSAGE A conflict occurred for CTRL+DEL:
+Binding(CTRL+DEL,
+	ParameterizedCommand(Command(org.eclipse.datatools.sqltools.result.removeInstance,Remove Result,
+		,
+		Category(org.eclipse.datatools.sqltools.result.category,SQL Results View,null,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+DEL,
+	ParameterizedCommand(Command(org.eclipse.graphiti.ui.internal.action.RemoveAction,Remove,
+		Remove selected Pictogram Elements,
+		Category(org.eclipse.graphiti.ui.Graphiti_Category,Edit,Graphiti Diagram Editor,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)

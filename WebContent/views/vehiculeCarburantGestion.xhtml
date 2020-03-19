@@ -1,0 +1,599 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-
+transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+	<html>
+<head>
+<title>Gestion Carburant</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="../framGraphique/calander.js" type="text/javascript"></script>
+</head>
+<body>
+	<f:view locale="#{languageManager.locale}">
+		<link rel="STYLESHEET" type="text/css"
+			href="../framGraphique/xte-style-gpr.css" title="css"></link>
+		<div id="page">
+			<div id="header">
+				<ui:include src="../framGraphique/header.xhtml"></ui:include>
+			</div>
+			<div id="menuPrincipale">
+				
+			</div>
+			<div id="contenu">
+				<div id="corpsGauche">
+					<rich:panel styleClass="rich-panel" style=" height : 56px;">
+						<h:form>
+							<h:panelGrid columns="2">
+								<a4j:commandLink id="upd1"
+									action="#{carburantGestionBean.viderchamp}"
+									reRender="accor1,accoruser1,accor2,accoruser2,buttonDelUpUser,buttonValidateUser,Label,
+						btnAnnull,btnAnnul,btnAjout,btnModif,libelle,Categorie,Ordre,
+					outputAjout,askUpdate,msgPanal,msgPanalErreur">
+									<h:graphicImage id="ajouter1"
+										value="../framGraphique/images/icone-add.gif"
+										style="margin-top:6px;" />
+								</a4j:commandLink>
+								<rich:toolTip for="upd1" direction="top-right"
+									value="Ajout carburant" />
+								
+							</h:panelGrid>
+							<a4j:keepAlive beanName="carburantGestionBean" />
+						</h:form>
+					</rich:panel>
+					<div>
+						<h:form id="accoruser1"
+							style="display:#{carburantGestionBean.hideAccor};">
+							<a4j:keepAlive beanName="carburantGestionBean" ajaxOnly="true" />
+							<rich:simpleTogglePanel id="accor1" styleClass="rich-panel"
+								switchType="client" label="#{carburantGestionBean.titleaccor}"
+								opened="#{carburantGestionBean.openaccor1}">
+								<rich:messages ajaxRendered="true" errorClass="msgError"
+									styleClass="error" />
+								<table width="100%">
+
+									<tr>
+										<td width="50%">
+										<h:panelGrid columns="2" style="display:#{carburantGestionBean.divnonconsult};">
+												<h:column>
+													<h:outputText value="#{msg.libelle}"
+														styleClass="xteDetailLabel" />
+													<rich:spacer width="5" />
+													<h:outputText value="*" styleClass="error" />
+												</h:column>
+												<h:inputText id="libelle"
+													value="#{carburantGestionBean.carburant.carburantLibelle}"
+													required="true"
+													requiredMessage="* #{msg.libelle} #{msg.champsobligatoire}"
+													maxlength="30" />
+												<h:column>
+													<h:outputText value="#{msg.carburantPrixLitre} "
+														styleClass="xteDetailLabel" />
+													<rich:spacer width="5" />
+													<h:outputText value="*" styleClass="error" />
+												</h:column>
+												<h:inputText id="carburantPrixLitre"
+													value="#{carburantGestionBean.carburant.carburantPrixLitre}"
+													required="true"
+													requiredMessage="* #{msg.carburantPrixLitre} #{msg.champsobligatoire}"
+													converterMessage="* #{msg.carburantPrixLitre} #{msg.champsentier}" 
+													maxlength="5"/>
+											</h:panelGrid>
+											
+											<h:panelGrid columns="2"
+											  style="display:#{carburantGestionBean.divconsult};">
+												<h:column>
+													<h:outputText
+														value="#{msg.carburantlibelleLabel} #{msg.deuxpointsLabel}"
+														styleClass="xteDetailLabel" />
+													<rich:spacer width="5" />
+												</h:column>
+												<h:outputText
+														value="#{carburantGestionBean.carburant.carburantLibelle}"
+														styleClass="xteDetailLabelOutput" />
+														
+														<h:column>
+													<h:outputText
+														value="#{msg.carburantPrixLitre} #{msg.deuxpointsLabel}"
+														styleClass="xteDetailLabel" />
+													<rich:spacer width="5" />
+												</h:column>
+												<h:outputText
+														value="#{carburantGestionBean.carburant.carburantPrixLitre}"
+														styleClass="xteDetailLabelOutput" />
+												
+											</h:panelGrid>
+										</td>
+
+										<td width="50%"></td>
+									</tr>
+								</table>
+
+								<rich:spacer height="10" />
+
+								<div align="center">
+								<div style="display:#{carburantGestionBean.divnonconsult};">
+									<a4j:commandButton id="btnAjout"
+										style="display:#{carburantGestionBean.divajouter};"
+										value="#{msg.buttonAjouter}" type="submit"
+										action="#{carburantGestionBean.save}"
+										oncomplete="if(#{carburantGestionBean.status}==true) #{rich:component('msgPanal')}.show();"
+										reRender="msgPanal"></a4j:commandButton>
+									<rich:spacer width="5" style=" height : 2px;" />
+									<a4j:commandButton id="btnModif"
+										style="display:#{carburantGestionBean.divmodifier};"
+										value="#{msg.buttonModifier}" type="submit"
+										action="#{carburantGestionBean.updateSelectedRow}"
+										oncomplete="if(#{carburantGestionBean.status1}==true) #{rich:component('askUpdate')}.show();
+					if(#{carburantGestionBean.status2}==true) #{rich:component('msgPanalErreur')}.show();"
+										reRender="data,btnAnnull,btnAnnul,btnAjout,btnModif,libelle,Categorie,Ordre,
+					outputAjout,askUpdate,msgPanal,msgPanalErreur,
+					accor1,accoruser1,accor2,accoruser2,buttonDelUpUser,buttonValidateUser"></a4j:commandButton>
+								</div>
+								</div>
+								<rich:spacer height="10" />
+								<div align="left">
+									<h:outputText value="#{msg.infoChampObligatoir}" style="display:#{carburantGestionBean.divnonconsult};" />
+								</div>
+								<!-- *******popup Info Validation d'ajout -->
+								<rich:modalPanel id="msgPanalCA" autosized="true" height="90"
+									width="350">
+									<a4j:keepAlive beanName="carburantGestionBean" ajaxOnly="true" />
+									<f:facet name="header">
+										<h:panelGrid columns="3" cellpadding="0" cellspacing="0">
+											<rich:spacer width="2" />
+											<h:outputText value="#{msg.labelInfo}"
+												styleClass="xtePopupInformationTextHeader" />
+										</h:panelGrid>
+									</f:facet>
+									<f:facet name="controls">
+										<h:panelGroup>
+											<h:graphicImage
+												value="../framGraphique/images/closePopup.png" width="15"
+												height="15" id="hidelinkCA" />
+											<rich:componentControl for="msgPanalCA" attachTo="hidelinkCA"
+												operation="hide" event="onclick" />
+										</h:panelGroup>
+									</f:facet>
+									<h:form>
+										<table align="center">
+											<tr>
+												<td align="left"><h:graphicImage
+														value="../framGraphique/images/information.png" />
+												</td>
+												<td align="center" colspan="2"><h:outputText
+														styleClass="xtePopupInformationText"
+														value="#{msg.confirmInsert}" />
+												</td>
+											</tr>
+										</table>
+										<div align="center">
+											<a4j:commandButton value="#{msg.buttonOk}" type="submit"
+												ajaxSingle="true" styleClass="submitButton"
+												action="#{carburantGestionBean.viderchamp}"
+												oncomplete="Richfaces.hideModalPanel('msgPanalCA');"
+												reRender="accor1,accoruser1,accor2,accoruser2,buttonDelUpUser,buttonValidateUser,Label,data,scroller,record" />
+										</div>
+									</h:form>
+								</rich:modalPanel>
+								<!-- *****popup Erreur d'ajout remaining name****** -->
+								<rich:modalPanel id="msgPanalErrRemainName" autosized="true"
+									height="90" width="350">
+									<a4j:keepAlive beanName="carburantGestionBean" />
+									<f:facet name="header">
+										<h:panelGrid columns="3" cellpadding="0" cellspacing="0">
+											<rich:spacer width="2" />
+											<h:outputText value="#{msg.labelError}"
+												styleClass="xtePopupInformationTextHeader" />
+										</h:panelGrid>
+									</f:facet>
+									<f:facet name="controls">
+										<h:panelGroup>
+											<h:graphicImage
+												value="../framGraphique/images/closePopup.png" width="15"
+												height="15" id="hidelinkErrRemainName" />
+											<rich:componentControl for="msgPanalErrRemainName"
+												attachTo="hidelinkErrRemainName" operation="hide"
+												event="onclick" />
+										</h:panelGroup>
+									</f:facet>
+									<h:form>
+										<table align="center">
+											<tr>
+												<td align="left"><h:graphicImage
+														value="../framGraphique/images/erreur.png" />
+												</td>
+												<td align="center" colspan="2"><h:outputText
+														styleClass="xtePopupInformationText" value="ccccc" />
+												</td>
+											</tr>
+										</table>
+										<div align="center">
+											<a4j:commandButton value="#{msg.buttonOk}"
+												onclick="Richfaces.hideModalPanel('msgPanalErrRemainName');"
+												type="submit" ajaxSingle="true" styleClass="submitButton" />
+										</div>
+									</h:form>
+								</rich:modalPanel>
+								<!-- ***************************popup Update ************************** -->
+
+								<rich:modalPanel id="askUpdate" autosized="true" height="90"
+									width="350">
+									<a4j:keepAlive beanName="carburantGestionBean" />
+									<f:facet name="header">
+										<h:panelGrid columns="3" cellpadding="0" cellspacing="0">
+											<h:outputText value="#{msg.labelInfo}"
+												styleClass="xtePopupInformationTextHeader" />
+										</h:panelGrid>
+									</f:facet>
+									<f:facet name="controls">
+										<h:panelGroup>
+											<h:graphicImage
+												value="../framGraphique/images/closePopup.png" width="15"
+												height="15" id="hidelink3" alt="Fermer" />
+											<rich:componentControl for="askUpdate" attachTo="hidelink3"
+												operation="hide" event="onclick" />
+										</h:panelGroup>
+									</f:facet>
+									<h:form>
+
+										<table align="center">
+											<tr>
+												<td align="left"><h:graphicImage
+														value="../framGraphique/images/information.png" />
+												</td>
+												<td align="center" colspan="2"><h:outputText
+														styleClass="xtePopupInformationText"
+														value="#{msg.confirmUpdate}" /></td>
+											</tr>
+										</table>
+										<div align="center">
+											<a4j:commandButton value="#{msg.buttonOk}"
+												action="#{carburantGestionBean.hidechamp}"
+												oncomplete="Richfaces.hideModalPanel('askUpdate');"
+												type="submit" ajaxSingle="true" styleClass="submitButton" 
+												reRender="accor1,accoruser1,accor2,accoruser2,buttonDelUpUser,buttonValidateUser,Label,data,scroller,record"/>
+										</div>
+										<rich:spacer width="10" />
+
+									</h:form>
+								</rich:modalPanel>
+								<!-- ******************popup validation de modification*********************** -->
+								<rich:modalPanel id="msgPanal" autosized="true" height="90"
+									width="350">
+									<a4j:keepAlive beanName="carburantGestionBean" />
+									<f:facet name="header">
+										<h:panelGrid columns="3" cellpadding="0" cellspacing="0">
+											<rich:spacer width="2" />
+											<h:outputText value="#{msg.labelInfo}"
+												styleClass="xtePopupInformationTextHeader" />
+										</h:panelGrid>
+									</f:facet>
+									<f:facet name="controls">
+										<a4j:commandLink id="upd1"
+											action="#{carburantGestionBean.viderchamp}"
+											reRender="accor1,accoruser1,accor2,accoruser2,buttonDelUpUser,buttonValidateUser,Label,data,scroller,record">
+											<h:graphicImage
+												value="../framGraphique/images/closePopup.png" width="15"
+												height="15" />
+										</a4j:commandLink>
+									</f:facet>
+									<h:form>
+										<table align="center">
+											<tr>
+												<td align="left"><h:graphicImage
+														value="../framGraphique/images/information.png" />
+												</td>
+												<td align="center" colspan="2"><h:outputText
+														styleClass="xtePopupInformationText"
+														value="#{msg.confirmInsert}" />
+												</td>
+											</tr>
+										</table>
+										<div align="center">
+											<a4j:commandButton value="#{msg.buttonOk}"
+												action="#{carburantGestionBean.hidechamp}"
+												oncomplete="Richfaces.hideModalPanel('msgPanal');"
+												type="submit" ajaxSingle="true" styleClass="submitButton"
+												reRender="accor1,accoruser1,accor2,accoruser2,buttonDelUpUser,buttonValidateUser,Label,data,scroller,record" />
+										</div>
+									</h:form>
+								</rich:modalPanel>
+								<!-- *****popup Erreur de modification****** -->
+								<rich:modalPanel id="msgPanalErreur" autosized="true"
+									height="90" width="350">
+									<a4j:keepAlive beanName="carburantGestionBean" />
+									<f:facet name="header">
+										<h:panelGrid columns="3" cellpadding="0" cellspacing="0">
+											<rich:spacer width="2" />
+											<h:outputText value="#{msg.labelError}"
+												styleClass="xtePopupInformationTextHeader" />
+										</h:panelGrid>
+									</f:facet>
+									<f:facet name="controls">
+										<h:panelGroup>
+											<h:graphicImage
+												value="../framGraphique/images/closePopup.png" width="15"
+												height="15" id="hidelinkErreur" />
+											<rich:componentControl for="msgPanalErreur"
+												attachTo="hidelinkErreur" operation="hide" event="onclick" />
+										</h:panelGroup>
+									</f:facet>
+									<h:form>
+										<table align="center">
+											<tr>
+												<td align="left"><h:graphicImage
+														value="../framGraphique/images/erreur.png" />
+												</td>
+												<td align="center" colspan="2"><h:outputText
+														styleClass="xtePopupInformationText" value="" />
+												</td>
+											</tr>
+										</table>
+										<div align="center">
+											<a4j:commandButton value="#{msg.buttonOk}"
+												onclick="Richfaces.hideModalPanel('msgPanalErreur');"
+												type="submit" ajaxSingle="true" styleClass="submitButton" />
+										</div>
+									</h:form>
+								</rich:modalPanel>
+							</rich:simpleTogglePanel>
+						</h:form>
+					</div>
+					<rich:panel styleClass="rich-panel">
+						<f:facet name="header">
+							<h:panelGrid columns="3">
+								<h:outputText value="#{msg.lcar}"
+									styleClass="banner-software-second-name" />
+							</h:panelGrid>
+						</f:facet>
+						<a4j:keepAlive beanName="carburantGestionBean" />
+						<h:form>
+							<rich:dataTable value="#{carburantGestionBean.listcarburantDM}"
+								var="carburant" id="data" rows="10" styleClass="rich-panel">
+								<rich:column  sortBy="#{carburant.carburantId}"
+									filterBy="#{carburant.carburantId}" filterEvent="onkeyup"
+									label="ref" width="10%">
+									<f:facet name="header">
+										<h:outputText value="#{msg.Identifiant}" />
+									</f:facet>
+									<h:outputText value="#{carburant.carburantId}" />
+								</rich:column>
+
+								<rich:column sortBy="#{carburant.carburantLibelle}"
+									filterBy="#{carburant.carburantLibelle}" filterEvent="onkeyup"
+									label="id">
+									<f:facet name="header">
+										<h:outputText value="#{msg.libelle}" />
+									</f:facet>
+									<h:outputText value="#{carburant.carburantLibelle}" />
+								</rich:column>
+
+								<rich:column sortBy="#{carburant.carburantPrixLitre}"
+									filterBy="#{carburant.carburantPrixLitre}"
+									filterEvent="onkeyup" label="id" width="10%">
+									<f:facet name="header">
+										<h:outputText value="#{msg.carburantPrixLitre}" />
+									</f:facet>
+									<h:outputText value="#{carburant.carburantPrixLitre}">
+										<f:convertNumber pattern="#0.000" />
+									</h:outputText>
+								</rich:column>
+								<rich:column width="10%">
+									<f:facet name="header">
+										<h:outputText value="#{msg.operation}" />
+									</f:facet>
+									<a4j:keepAlive beanName="carburantGestionBean" />
+									<center>
+										<h:panelGrid columns="6">
+											<a4j:commandLink id="cl"
+												action="#{carburantGestionBean.getSelectionRowConst}"
+												reRender="accor1,accoruser1,accor2,accoruser2,buttonDelUpUser,buttonValidateUser,Label">
+												<h:graphicImage value="../framGraphique/images/icone-detail.png"
+													alt="consulter" />
+											</a4j:commandLink>
+											<rich:toolTip for="cl" value="#{msg.labelConsulter}"
+												direction="top-right" />
+											<a4j:commandLink id="ed"
+												action="#{carburantGestionBean.getSelectionRow}"
+												reRender="accor1,accoruser1,accor2,accoruser2,buttonDelUpUser,buttonValidateUser,Label">
+												<h:graphicImage value="../framGraphique/images/Edit.png"
+													alt="editer" />
+											</a4j:commandLink>
+											<rich:toolTip for="ed" value="#{msg.labelEdit}"
+												direction="top-right" />
+											<a4j:commandLink id="del"
+												action="#{carburantGestionBean.getSelectionRowDel}"
+												
+												oncomplete="if(#{carburantGestionBean.status4}==true) #{rich:component('askDelete')}.show();
+												if(#{carburantGestionBean.status5}==true) #{rich:component('msgPanalED')}.show();"					
+												>
+												<h:graphicImage value="../framGraphique/images/Delete.png"
+													alt="Delete" />
+											</a4j:commandLink>
+											<rich:toolTip for="del" value="#{msg.labelDelete}"
+												direction="top-right" />
+										</h:panelGrid>
+									</center>
+									<rich:toolTip for="upd" direction="top-right"
+										value="#{msg.labelConsulter}" />
+								</rich:column>
+							</rich:dataTable>
+							<div align="center">
+								<rich:datascroller for="data" id="scroller" />
+								<h:outputText value="#{msg.nbEnregistrement}"
+									styleClass="xteNombreEnregistrementLabelOutput" />
+								<h:outputText id="record"
+									value="#{carburantGestionBean.records}"
+									styleClass="xteNombreEnregistrementLabelOutput" />
+							</div>
+						</h:form>
+						<!-- *********ask Delete*********** -->
+						<rich:modalPanel id="askDelete" autosized="true" height="90"
+							width="350">
+							<f:facet name="header">
+								<h:panelGrid columns="3" cellpadding="0" cellspacing="0">
+									<h:outputText value="#{msg.labelConfirm}"
+										styleClass="xtePopupInformationTextHeader" />
+								</h:panelGrid>
+							</f:facet>
+							<f:facet name="controls">
+								<h:panelGroup>
+									<h:graphicImage value="../framGraphique/images/closePopup.png"
+										width="15" height="15" id="hidelink2" alt="Fermer" />
+									<rich:componentControl for="askDelete" attachTo="hidelink2"
+										operation="hide" event="onclick" />
+								</h:panelGroup>
+							</f:facet>
+							<a4j:keepAlive beanName="carburantGestionBean" />
+							<h:form>
+								<table align="center">
+									<tr>
+										<td align="left"><h:graphicImage
+												value="../framGraphique/images/interrogation.png" />
+										</td>
+										<td align="center" colspan="2"><h:outputText
+												styleClass="xtePopupInformationText"
+												value="#{msg.confirmDelete}" />
+										</td>
+									</tr>
+								</table>
+								<div align="center">
+									<a4j:commandButton value="#{msg.buttonOui}"
+										action="#{carburantGestionBean.deleteSelectedRow}"
+										oncomplete="Richfaces.hideModalPanel('askDelete'); #{rich:component('msgPanalCD')}.show();"
+										type="submit" ajaxSingle="true" styleClass="submitButton" />
+									<rich:spacer width="10" />
+									<a4j:commandButton value="#{msg.buttonNon}"
+										styleClass="submitButton"
+										onclick="Richfaces.hideModalPanel('askDelete');" />
+								</div>
+							</h:form>
+						</rich:modalPanel>
+						<!-- *****popup Info validation de suppression******* -->
+						<rich:modalPanel id="msgPanalCD" autosized="true" height="90"
+							width="350">
+							<a4j:keepAlive beanName="carburantGestionBean" ajaxOnly="true" />
+							<f:facet name="header">
+								<h:panelGrid columns="3" cellpadding="0" cellspacing="0">
+									<rich:spacer width="2" />
+									<h:outputText value="#{msg.labelInfo}"
+										styleClass="xtePopupInformationTextHeader" />
+								</h:panelGrid>
+							</f:facet>
+							<f:facet name="controls">
+								<a4j:commandLink id="upd1"
+									action="#{carburantGestionBean.viderchamp}"
+									reRender="accor1,accoruser1,accor2,accoruser2,buttonDelUpUser,buttonValidateUser,Label,data,scroller,record">
+									<h:graphicImage value="../framGraphique/images/closePopup.png"
+										width="15" height="15" />
+								</a4j:commandLink>
+							</f:facet>
+							<h:form>
+								<table align="center">
+									<tr>
+										<td align="left"><h:graphicImage
+												value="../framGraphique/images/information.png" />
+										</td>
+										<td align="center" colspan="2"><h:outputText
+												styleClass="xtePopupInformationText"
+												value="#{msg.confirmSuppression}" />
+										</td>
+									</tr>
+								</table>
+								<div align="center">
+									<a4j:commandButton value="#{msg.buttonOk}"
+										onclick="Richfaces.hideModalPanel('msgPanalCD');"
+										type="submit" ajaxSingle="true" styleClass="submitButton"
+										action="#{carburantGestionBean.hidechamp}"
+										reRender="accor1,accoruser1,accor2,accoruser2,buttonDelUpUser,buttonValidateUser,Label,data,scroller,record" />
+								</div>
+							</h:form>
+						</rich:modalPanel>
+						<!-- *****popup Erreur de suppression****** -->
+								<rich:modalPanel id="msgPanalED" autosized="true"
+									height="90" width="350">
+									<a4j:keepAlive beanName="carburantGestionBean" />
+									<f:facet name="header">
+										<h:panelGrid columns="3" cellpadding="0" cellspacing="0">
+											<rich:spacer width="2" />
+											<h:outputText value="#{msg.labelError}"
+												styleClass="xtePopupInformationTextHeader" />
+										</h:panelGrid>
+									</f:facet>
+									<f:facet name="controls">
+										<h:panelGroup>
+											<h:graphicImage value="../framGraphique/images/close.png"
+												width="15" height="15" id="hidelinkErreur" />
+											<rich:componentControl for="msgPanalED"
+												attachTo="hidelinkErreur" operation="hide" event="onclick" />
+										</h:panelGroup>
+									</f:facet>
+									<h:form>
+										<table align="center">
+											<tr>
+												<td align="left"><h:graphicImage
+														value="../framGraphique/images/erreur.png" /></td>
+												<td align="center" colspan="2"><h:outputText
+														styleClass="xtePopupInformationText" value="#{msg.marqueerreurSuppression}" /></td>
+											</tr>
+										</table>
+										<div align="center">
+											<a4j:commandButton value="#{msg.buttonOk}"
+												onclick="Richfaces.hideModalPanel('msgPanalED');"
+												action="#{carburantGestionBean.hidechamp}"
+												type="submit" ajaxSingle="true" styleClass="submitButton"
+												reRender="accor1,accoruser1,accor2,accoruser2,buttonDelUpUser,buttonValidateUser,Label,data,scroller,record" />
+										</div>
+									</h:form>
+								</rich:modalPanel>
+						
+					</rich:panel>
+				</div>
+				<div id="inter" />
+				<div id="corpsDroite">
+					<div class="monthenc">
+						<script type="text/javascript">
+//<![CDATA[
+            document.write(monthi8[w4s.getMonth()]); //]]>
+            </script>
+					</div>
+					<div class="datebx">
+						<script type="text/javascript">
+//<![CDATA[
+            document.write(s6ix[s3x]); //]]>
+            </script>
+						<div class="dateenc">
+							<a href="document.location.href='accueil.jsf'"><script
+									type="text/javascript">
+//<![CDATA[
+            document.write(w4s.getDate()); //]]>
+            </script> </a>
+						</div>
+					</div>
+					<div class="dayenc">
+						<a href="document.location.href='accueil.jsf'"><script
+								type="text/javascript">
+//<![CDATA[
+            document.write(s0x[w4s.getDay()]); //]]>
+            </script> </a>
+					</div>
+					<div class="yearenc">
+						<script type="text/javascript">
+//<![CDATA[
+            document.write(w4s.getFullYear()); //]]>
+            </script>
+					</div>
+				</div>
+			</div>
+			<div id="footer">
+				<ui:include src="../framGraphique/footer.xhtml"></ui:include>
+			</div>
+		</div>
+	</f:view>
+</body>
+	</html>
+</ui:composition>
